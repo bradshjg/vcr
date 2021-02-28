@@ -17,12 +17,14 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Install dependencies
+    - name: Install OS dependencies
       run: |
         sudo apt-get install libcurl4-openssl-dev
     - name: Set up Ruby ${{ matrix.ruby-version }}
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: ${{ matrix.ruby-version }}
+    - name: Install Ruby deps
+      run: bundle install
     - name: Run tests
       run: script/ci.sh
