@@ -27,6 +27,7 @@ fold() {
 }
 
 run() {
+  [[ "${BUNDLE_GEMFILE##*/}" == Gemfile.* ]] && bundle install
   # Save warnings on stderr to a separate file
   RUBYOPT="$RUBYOPT -w" "$@" 2> >(tee >(grep 'warning:' >>"$warnings") | grep -v 'warning:')
 }
